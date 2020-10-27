@@ -82,7 +82,7 @@ const addToCart = (dispatch) => (product, customIngredients) => {
 };
 
 const saveProductEdit = (dispatch) => (id, customIngredients) => {
-  console.log(' save product id', id)
+  //console.log(' save product id', id)
   dispatch({ type: "save_product_edit", payload: { id, customIngredients } });
   Alert.alert(
     "",
@@ -98,7 +98,7 @@ const addOneMoreProduct = (dispatch) => (product) => {
 };
 
 const deleteProduct = (dispatch) => (id) => {
-  console.log(' delete product id', id)
+  //console.log(' delete product id', id)
   dispatch({ type: "delete_product", payload: id });
 };
 
@@ -125,7 +125,7 @@ const handleCheckout = (dispatch) => async ({products, timeToMake, note, totalPr
     confirmationNumber: confirmationNumber? confirmationNumber: null,
     paymentMethod: paymentMethod
   })
-  console.log('userId', firebase.auth().currentUser.uid, 'orderDetails', orderDetailsId.id);
+  //console.log('userId', firebase.auth().currentUser.uid, 'orderDetails', orderDetailsId.id);
   
   const res = await serverApi.post('/checkout', {
     orderDetailsId: orderDetailsId.id
@@ -162,7 +162,7 @@ const handleCreditCheckout  = (dispatch) => async ({products, timeToMake, note, 
     confirmationNumber: confirmationNumber? confirmationNumber: null,
     paymentMethod: paymentMethod
   })
-  console.log( 'orderDetails', orderDetailsId.id);
+  //console.log( 'orderDetails', orderDetailsId.id);
   
  
   const res = await serverApi.post('/creditCheckout', {

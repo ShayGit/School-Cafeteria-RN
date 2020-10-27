@@ -49,12 +49,12 @@ const authReducer = (state, action) => {
 
 const clearErrorMessage = (dispatch) => () => {
   dispatch("clear_error_message" );
-  console.log("clearing error message");
+  //console.log("clearing error message");
   
 };
 
 const setUser = (dispatch) => async (currentUser) => {
-  console.log("Set user");
+  //console.log("Set user");
   try {
     let user = null;
     const userFromStorage = await AsyncStorage.getItem("user");
@@ -92,7 +92,7 @@ const setUser = (dispatch) => async (currentUser) => {
 };
 
 const signin = (dispatch) => async ({ email, password }) => {
-  console.log("Signin");
+  //console.log("Signin");
   try {
     await firebase.auth().signInWithEmailAndPassword(email, password);
   } catch (error) {
@@ -119,7 +119,7 @@ const signup = (dispatch) => async ({
   checkPassword,
   stuffCode,
 }) => {
-  console.log("Signup");
+  //console.log("Signup");
   try {
     if (password.length >= 6 && password == checkPassword) {
       if (stuffCode === "19384" || stuffCode === "") {
@@ -191,7 +191,7 @@ const signup = (dispatch) => async ({
 const signout = (dispatch) => async (callback) => {
   try {
     dispatch({ type: "set_loading", payload: true });
-    console.log("signout");
+    //console.log("signout");
     await firebase.auth().signOut();
     dispatch({ type: "signout" });
   } catch (error) {
@@ -202,7 +202,7 @@ const signout = (dispatch) => async (callback) => {
 
 const resetPassword = (dispatch) => async ({ email }) => {
   try {
-    console.log("reset password");
+    //console.log("reset password");
     await firebase.auth().sendPasswordResetEmail(email);
   } catch (error) {
     var errorCode = error.code;
@@ -231,12 +231,11 @@ const updateUserInformation = (dispatch) => async ({
 }) => {
   
     try {
-      console.log("update user info");
+      //console.log("update user info");
       let userUpdate = null;
       const userFromStorage = await AsyncStorage.getItem("user");
       const parsedUser = JSON.parse(userFromStorage);
       
-      console.log('ddd',stuffCode)
       if(stuffCode !=='')
       {
         userUpdate= {
@@ -355,7 +354,6 @@ const updateUserInformation = (dispatch) => async ({
             isStuff: userStored.isStuff,
           };
         } else {
-          console.log('async exists')
           const parseUser = JSON.parse(userFromStorage);
           user = {
             email: currentUser.email,
@@ -420,7 +418,7 @@ const confirmCode = (dispatch) => async ({ phoneVerificationId, code }) => {
 };
 
 const setAuthenticated = (dispatch) => (isPasswordAuth, isPhoneAuth) => {
-  console.log(isPasswordAuth, isPhoneAuth);
+  //console.log(isPasswordAuth, isPhoneAuth);
   dispatch({
     type: "set_authenticated",
     payload: {

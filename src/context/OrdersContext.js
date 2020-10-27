@@ -64,9 +64,9 @@ const ordersReducer = (state, action) => {
       
   
 
-        console.log(change.doc.id, order.createdAt)
+        //console.log(change.doc.id, order.createdAt)
         if (change.type === "added") {
-          console.log('added');
+          //console.log('added');
           if (index === -1 && ordersTemp.length == 20) {
             ordersTemp.unshift(orderObj);
             ordersTemp.pop();
@@ -81,7 +81,7 @@ const ordersReducer = (state, action) => {
           }
         }
         if (change.type === "modified") {
-          console.log('modified');
+          //console.log('modified');
 
           if (index !== -1) {
             ordersTemp[index] = orderObj;
@@ -99,7 +99,7 @@ const ordersReducer = (state, action) => {
 };
 
 const getOrder = (dispatch) => async ({ orderId }) => {
-  console.log(orderId);
+  //console.log(orderId);
   const order = await serverApi.get(`/orders/${orderId}`);
   const orderData = order.data;
   const orderObj = {...orderData,
@@ -125,7 +125,7 @@ const getLastOrders = (dispatch) => async () => {
     let orders =[];
     const res = await serverApi.get("/getLastOrders");
     res.data.forEach((order) =>{
-      console.log (order.createdAt)
+      //console.log (order.createdAt)
       orders.push({ ...order, 
         createdAt: format(parseISO(order.createdAt), "dd/MM/yyy HH:mm"),
           timeToMake:

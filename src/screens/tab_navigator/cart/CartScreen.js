@@ -189,10 +189,10 @@ const CartScreen = ({ navigation }) => {
                         <TouchableOpacity
                           style={styles.backRightBtn}
                           onPress={() => {
-                            console.log(
-                              "add product id",
-                              products.indexOf(rowData.item)
-                            );
+                            // console.log(
+                            //   "add product id",
+                            //   products.indexOf(rowData.item)
+                            // );
                             addOneMoreProduct(rowData.item);
                           }}
                         >
@@ -211,8 +211,6 @@ const CartScreen = ({ navigation }) => {
                         <TouchableOpacity
                           style={[styles.backRightBtn, { left: 60 }]}
                           onPress={() => {
-
-                            console.log("heree", products.indexOf(rowData.item));
                             navigation.navigate("EditProduct", {
                               id: products.indexOf(rowData.item),
                             });

@@ -218,17 +218,20 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontFamily: "Heebo_500Medium",
-    fontSize: 18,
     color: "black",
     textAlign: "center",
     flex: 1,
+    fontSize: 16,
+    height: 40,
+    padding: 10, 
   },
   col: {
     flexDirection: "row",
     marginTop: 20,
-    alignItems: "flex-start",
+    alignItems: "center",
     justifyContent: "space-between",
     marginHorizontal: 10,
+    
   },
 });
 

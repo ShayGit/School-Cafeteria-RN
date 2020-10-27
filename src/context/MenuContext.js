@@ -37,7 +37,7 @@ const fetchCategories = (dispatch) => async () => {
       .collection("Categories")
       .where("parent", "==", null)
       .get();
-      console.log("firestore request categories");
+      //console.log("firestore request categories");
     const listToShow = [];
     categories.forEach((category) => {
       const categoryData = category.data();
@@ -87,14 +87,14 @@ const itemSelected = (dispatch) => async ({ categories, products, item }) => {
             .collection("products")
             .where("category", "==", itemId)
             .get();
-            console.log("firestore request products");
+            //console.log("firestore request products");
 
           if (productsDB.empty) {
             const subCategoriesDB = await firestore
               .collection("Categories")
               .where("parent", "==", itemId)
               .get();
-             console.log("firestore request sub categories");
+             //console.log("firestore request sub categories");
 
             if (!subCategoriesDB.empty) {
               subCategoriesDB.forEach((subCategory) => {

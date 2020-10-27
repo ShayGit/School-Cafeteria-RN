@@ -36,12 +36,12 @@ const MyOrdersScreen = ({navigation}) => {
 
   
   useEffect(() => {
-    console.log('mount myorders useeffect');
+    //console.log('mount myorders useeffect');
    
     let date =  format(new Date(),"dd/MM/yyyy");
     date = parse(date, "dd/MM/yyyy", new Date())
 
-console.log(date);
+
 
     const query = firestore
       .collection("orders")
@@ -51,7 +51,7 @@ console.log(date);
       
     const observer = query.onSnapshot(
       (querySnapshot) => {
-        console.log('onsnapshot')
+        //console.log('onsnapshot')
         updateOrders(querySnapshot);
       },
       (err) => {
@@ -62,7 +62,7 @@ console.log(date);
     getLastOrders();
 
     return () => {
-      console.log('unmount myorders useeffect');
+      //console.log('unmount myorders useeffect');
       observer();
       reset();
     }

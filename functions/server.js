@@ -54,7 +54,7 @@ router.post("/checkout", requireAuth, async (req, res) => {
       await db.collection("order_details").doc(orderDetailsId).get()
     ).data();
 
-    console.log(orderDetails.timeToMake);
+
 
     const order = await db.collection("orders").add({
       products: orderDetails.products,
@@ -132,7 +132,6 @@ router.get("/getLastOrders", requireAuth, async (req, res) => {
       });
     }
 
-    console.log(orders);
     res.json(orders);
   } catch (err) {
     console.log(err);
@@ -174,7 +173,6 @@ router.post("/creditCheckout", requireAuth, async (req, res) => {
       },
     });
 
-    console.log('order', order);
     const options = {
       headers: { Authorization: `Basic ${bluesnapAuthorizationKey}` },
     };
@@ -184,7 +182,6 @@ router.post("/creditCheckout", requireAuth, async (req, res) => {
       {},
       options
     );
-      console.log('bluesnapres',bluesnapRes);
     const bluesnapToken = bluesnapRes.headers.location.replace(
       `${bluesnapBase}/services/2/payment-fields-tokens/`,
       ""
@@ -260,7 +257,6 @@ router.get("/web/checkout/redirect", requireAuth, async (req, res) => {
 
 router.post("/payment/send", requireAuth, async (req, res) => {
   try {
-    console.log(req.body);
 
     const paymentHeaders = {
       headers: {
@@ -276,7 +272,6 @@ router.post("/payment/send", requireAuth, async (req, res) => {
       paymentHeaders
     );
 
-    console.log(makePaymentRes.data);
     if (makePaymentRes.data.processingInfo.processingStatus === "success") {
       const orderRef = db.collection("orders").doc(req.body.orderId);
 
@@ -286,7 +281,6 @@ router.post("/payment/send", requireAuth, async (req, res) => {
         },
         { merge: true }
       );
-      console.log(updateRes);
 
       res.send({ success: true });
     } else {
@@ -310,7 +304,6 @@ router.get("/payment/cancel", (req, res) => {
 
 router.post("/bluesnap/webhook", async (req, res) => {
   try {
-    console.log(req.body);
 
     if (req.body.transactionType === "CHARGE") {
       //

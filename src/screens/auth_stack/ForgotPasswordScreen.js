@@ -87,16 +87,17 @@ const styles = StyleSheet.create({
   col: {
     flexDirection: "row",
     marginTop: 20,
-    alignItems: "flex-start",
+    alignItems: "center",
     justifyContent: "space-between",
     marginHorizontal: 10,
   },
   textInput: {
     fontFamily: "Heebo_500Medium",
-    fontSize: 18,
+    fontSize: 16,
+    height: 40,
+    padding: 10, 
     color: "black",
     textAlign: "center",
-    flex: 1,
   },
 });
 

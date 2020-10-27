@@ -1,9 +1,4 @@
-import {
-  Alert,
-  BackHandler,
-  StyleSheet,
-  View,
-} from "react-native";
+import { Alert, BackHandler, StyleSheet, View } from "react-native";
 import React, { useContext, useEffect, useRef, useState } from "react";
 
 import { Context as CartContext } from "context/CartContext";
@@ -17,9 +12,9 @@ const CheckoutWebViewScreen = ({ navigation, route }) => {
   const { emptyCart } = useContext(CartContext);
   const [htmlPage, setHtmlPage] = useState();
   const [canGoBack, setCanGoBack] = useState(false);
-const [bluesnapData, setBluesnapData] = useState({});
-const [idToken, setIdToken] = useState();
-const BASE_URL = process.env.BASE_URL;
+  const [bluesnapData, setBluesnapData] = useState({});
+  const [idToken, setIdToken] = useState();
+  const BASE_URL = process.env.BASE_URL;
 
   const webviewRef = useRef(null);
 
@@ -33,17 +28,14 @@ const BASE_URL = process.env.BASE_URL;
   };
 
   useEffect(() => {
+    console.log(BASE_URL)
     BackHandler.addEventListener("hardwareBackPress", handleBackButton);
     async function getHtml() {
       try {
-        //const res = await serverApi.get(`/web/checkout/redirect?bluesnapToken=${route.params.bluesnapToken}&orderId=${route.params.orderId}`
-       // );
-        const token = await firebase.auth().currentUser.getIdToken(/* forceRefresh */ true);
-        setIdToken(`Bearer ${token}`)
-       // console.log(res.data.bluesnapData);
-        // setBluesnapData(res.data.bluesnapData);
-        // setIdToken(res.data.bluesnapData.idToken);
-        //setHtmlPage(res.data.html);
+        const token = await firebase
+          .auth()
+          .currentUser.getIdToken(/* forceRefresh */ true);
+        setIdToken(`Bearer ${token}`);
       } catch (err) {
         Alert.alert("", err);
         console.log(err);
@@ -57,7 +49,7 @@ const BASE_URL = process.env.BASE_URL;
   }, []);
 
   const handleChange = (e) => {
-    console.log(e);
+    //console.log(e);
     setCanGoBack(e.canGoBack);
     if (!e.loading && e.url === `${BASE_URL}/payment/success`) {
       emptyCart();
@@ -67,36 +59,32 @@ const BASE_URL = process.env.BASE_URL;
       );
     } else if (!e.loading && e.url === `${BASE_URL}/payment/cancel`) {
       navigation.goBack();
-      Alert.alert('','שגיאה, לא התבצע תשלום')
+      Alert.alert("", "שגיאה, לא התבצע תשלום");
     }
   };
 
- 
-
-
   return (
     <SafeAreaView style={styles.container}>
-    <CustomHeader text="תשלום" isBack={navigation.canGoBack()} />
-    <View style={{flex: 1}}>
-{
-(idToken &&
-    <WebView
-      javaScriptEnabled
-      onMessage={(event) => {
-        console.log(event.nativeEvent.data);
-      }}
-      source={{ 
-        uri: `${URLs.BASE_API}/web/checkout/redirect?bluesnapToken=${route.params.bluesnapToken}&orderId=${route.params.orderId}`,
-        headers: {
-          'Authorization': idToken
-        }
-       }}
-       onNavigationStateChange={handleChange}
-       scalesPageToFit={true}
-      ref={webviewRef}
-    />
-)}
-     </View>
+      <CustomHeader text="תשלום" isBack={navigation.canGoBack()} />
+      <View style={{ flex: 1 }}>
+        {idToken && (
+          <WebView
+            javaScriptEnabled
+            onMessage={(event) => {
+              console.log(event.nativeEvent.data);
+            }}
+            source={{
+              uri: `${BASE_URL}/web/checkout/redirect?bluesnapToken=${route.params.bluesnapToken}&orderId=${route.params.orderId}`,
+              headers: {
+                Authorization: idToken,
+              },
+            }}
+            onNavigationStateChange={handleChange}
+            scalesPageToFit={true}
+            ref={webviewRef}
+          />
+        )}
+      </View>
     </SafeAreaView>
   );
 };

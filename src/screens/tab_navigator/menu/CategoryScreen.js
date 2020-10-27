@@ -31,13 +31,13 @@ const CategoryScreen = ({ route, navigation }) => {
   );
 
   useEffect(() => {
-    console.log("useEffect Category Screen");
+    //console.log("useEffect Category Screen");
     if (route.params === undefined) {
       fetchCategories();
     }
 
     return ()=> {
-      console.log('unmounted Category Screen')
+      //console.log('unmounted Category Screen')
     }
   }, []);
 

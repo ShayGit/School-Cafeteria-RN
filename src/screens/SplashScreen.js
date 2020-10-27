@@ -18,7 +18,7 @@ const SplashScreen = ({ navigation }) => {
 
   React.useEffect(() => {
     const listener = firebase.auth().onAuthStateChanged((user) => {
-      console.log("onauth");
+      //console.log("onauth");
       if (user) {
         if (user.email && user.phoneNumber) {
           // ALL GOOD

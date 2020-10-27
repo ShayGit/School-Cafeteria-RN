@@ -1,5 +1,4 @@
 const checkoutHtmlPage = (bluesnapData) => {
-  console.log(`${JSON.stringify(bluesnapData.cancel_url)}`);
   return ` <html>
       <body>
         <script type="text/javascript" src="https://sandbox.bluesnap.com/web-sdk/4/bluesnap.js"></script>
@@ -15,8 +14,7 @@ const checkoutHtmlPage = (bluesnapData) => {
           Http.open("GET", url, true);
           Http.onreadystatechange = function() {
             if (Http.readyState == 4 && Http.status == 200) {
-              window.location.href = url;
-              document.write(Http.responseText)
+              window.location = url;
             }
             else
             {
@@ -34,8 +32,7 @@ const checkoutHtmlPage = (bluesnapData) => {
           Http.open("GET", url, true);
           Http.onreadystatechange = function() {
             if (Http.readyState == 4 && Http.status == 200) {
-              window.location.href = url;
-              document.write(Http.responseText)
+              window.location = url;
             }
             else
             {
